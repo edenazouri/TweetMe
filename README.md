@@ -1,9 +1,8 @@
 MyTwitter
 
-### Installation ###
+### How to use ###
 
  npm install
 
- ### Getting started ###
-
+ ### Remarks ###
 Run the app ```node server```
