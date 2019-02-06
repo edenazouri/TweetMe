@@ -4,7 +4,7 @@
   "description": "Twitter API App",
   "main": "server.js",
   "scripts": {
-    "test": ""
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "Eden Azouri",
