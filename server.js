@@ -1,6 +1,6 @@
 const express = require('express');
 const TwitterService = require('./services/twitter-service');
-const port = require('./config').port;
+const localPort = require('./config').port;
 const credentials = require('./config').credentials;
 const bodyParser = require('body-parser');
 
@@ -88,6 +88,8 @@ app.delete('/twitter/delete_last_tweet', function(req, res) {
     });
 })
 
+
+var port = process.env.PORT || localPort;
 app.listen(port, () => {
     console.log('App listening on port', port);
 })
