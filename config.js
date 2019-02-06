@@ -1,4 +1,4 @@
-module.exports.port = 80;
+module.exports.port = 8080;
 
 module.exports.credentials = {
     apiKey: '2QEdT3zapEXG58yqpjOZiEr05',
