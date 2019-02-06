@@ -1,0 +1,101 @@
+<html>
+    <head>
+        <title>Eden Azouri - TweetMe IronSource Challenge</title>
+    </head>
+    <body>
+        <center>
+            <img width="70" src="https://www.freeiconspng.com/uploads/twitter-transparent-vector-png-25.png">
+            <h1>Eden Azouri - TweetMe App - IronSource Challenge</h1>
+        </center>
+        <div align="center">
+            <table border="0">
+                <tr>
+                    <th>Parameters</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td>
+                        <form id="listForm">
+                            <textarea name="count" rows="2" cols="50" placeholder="Write how many tweets to list..."></textarea><br>
+                        </form>
+                    </td>
+                    <td>
+                        <input type="button" onclick="javascript: list_submit()" value="List!">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <form id="tweetForm">
+                            <textarea name="status" rows="2" cols="50" placeholder="Write your tweet..."></textarea><br>
+                        </form>
+                    </td>
+                    <td>
+                        <input type="button" onclick="javascript: tweet_submit()" value="Tweet!">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <form id="searchForm">
+                            <textarea name="keyword" rows="2" cols="50" placeholder="Write your search keyword..."></textarea><br>
+                        </form>
+                    </td>
+                    <td>
+                        <input type="button" onclick="javascript: search_submit()" value="Search!">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Delete last tweet</td>
+                    <td>
+                        <input type="button" onclick="javascript: delete_submit()" value="Delete!">
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+    <script>
+        function tweet_submit() {
+            // take form, convert it to json dictionary
+            arr = $("#tweetForm").serializeArray()
+            final_json = {}
+            for (i in arr) {
+                final_json[arr[i]['name']] = arr[i]['value']
+            }
+            var formData = JSON.stringify(final_json);
+
+            // send with ajax
+            $.ajax({
+              type: "POST",
+              url: "/twitter/tweet",
+              data: formData,
+              dataType: "json",
+              complete: function(msg) { alert(msg.responseText); },
+              contentType : "application/json"
+            });
+        }
+
+        function list_submit() {
+            // take form, convert it to json dictionary
+            arr = $("#listForm").serializeArray()
+            location.href="/twitter/list?count=" + arr[0]['value'];
+        }
+
+        function search_submit() {
+            // take form, convert it to json dictionary
+            arr = $("#searchForm").serializeArray()
+            location.href="/twitter/search_keyword?keyword=" + arr[0]['value'];
+        }
+
+        function delete_submit() {
+            $.ajax({
+                type: "DELETE",
+                url: "/twitter/delete_last_tweet",
+                success: function(msg){
+                    alert(msg);
+                }
+            });
+        }
+    </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </body>
+</html>
