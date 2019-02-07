@@ -16,19 +16,21 @@ const twitterService = new TwitterService({
 
 const moduleName = 'Server:';
 
+
 app.get('/', function(req, res){
     console.log('%s Homepage send to user: Start', moduleName);
     res.sendFile('index.html', { root: __dirname + "/static" });
     console.log('%s Homepage send to user: Completed successfully', moduleName);
 });
 
+
 app.post('/twitter/tweet',  function (req, res) {
   const status = req.body.status;
   const reqName = 'Tweet request:';
   console.log('%s %s Start', moduleName, reqName);
   twitterService.tweet(status).then(function (tweet) {
-      res.sendStatus(200);
-      //TODO: send text
+      res.status(200);
+      res.send('Tweet sent successfully');
       console.log('%s %s Completed successfully', moduleName, reqName);
   }).catch(function (err) {
         console.error('%s % s Failure: ', moduleName, reqName, err);
@@ -36,6 +38,7 @@ app.post('/twitter/tweet',  function (req, res) {
         res.send('Failed to tweet');
   });
 });
+
 
 app.get('/twitter/list', function (req,res)  {
     const reqName = 'Tweet list request:';
@@ -55,41 +58,49 @@ app.get('/twitter/list', function (req,res)  {
     // cases are all bad requests: count is NAN / not an Integer / Negative integer
         res.status(400);
         res.send('Failed to retrieve list of tweets. Error: ' + e);
+        console.error('%s %s Failure: Illegal Argument Exception thrown', moduleName, reqName);
     }
 });
 
+
 app.get('/twitter/search_keyword', function (req,res)  {
+    const reqName = 'Search tweets by keyword request:';
+    console.log('%s %s Start', moduleName, reqName);
     twitterService.searchKeyword(req.query.keyword).then(function (tweets) {
+        console.log('%s %s Completed successfully', moduleName, reqName);
+        res.status(200);
         res.send(tweets);
     }).catch(function (err) {
+        console.error('%s %s Failure: ', moduleName, reqName, err);
         res.status(500);
-        //fix indicative.
-        res.send(err);
+        res.send('Failed to conduct tweets search by keyword');
     });
 })
 
+
 app.delete('/twitter/delete_last_tweet', function(req, res) {
-    console.log('Starting last tweet deletion');
+    const reqName = 'Delete last tweet request:';
+    console.log('%s %s Start', moduleName, reqName);
     twitterService.deleteLastTweet().then((response) => {
         if (typeof(response) == 'string') {
-            console.log('Finished last tweet deletion');
+            console.log('%s %s No tweets to delete', moduleName, reqName);
             res.status(200);
             res.send(response);
         }
-        else { //Promise
-                res.status(200);
-                res.send ('Last tweet deleted');
+        else {
+            console.log('%s %s Completed successfully', moduleName, reqName);
+            res.status(200);
+            res.send ('Last tweet deleted');
         }
     }).catch(function (err)  {
-                console.error('Delete last tweet failed: ' ,err);
-                res.status(500);
-                //fix indicative message
-                res.send('indic');
+            console.error('%s %s Failure: ', moduleName, reqName, err);
+            res.status(500);
+            res.send('Failed to delete last tweet');
     });
 })
 
 
-var port = process.env.PORT || localPort;
+const port = process.env.PORT || localPort;
 app.listen(port, () => {
     console.log('App listening on port', port);
 })
