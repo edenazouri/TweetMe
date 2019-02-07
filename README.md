@@ -20,7 +20,7 @@ This is what we offer and what we expect:
         * POST HTTP request to    /tweeter/tweet
         * BODY of request should contain a JSON object with the status.
               Example: {status: 'Hey ironSource!'}
-          Note: Twitter's API blocks attempts to tweet the same status twice within a short period of time.
+          Note: Twitter's API blocks attempts to tweet the same status twice within a short period of time
 
     * Get a list of your recent tweets:
         * GET HTTP request to    /twitter/list
