@@ -1,10 +1,10 @@
-####Are you ready for this?
+#### Are you ready for this?
 
 Welcome to TweetMe!
 Tired of having to connect directly to the Twitter App every time you want to use your account?
 We are here for you! Let us do the hard work for you!
 
-####How do I use TweetMe?
+#### How do I use TweetMe?
 Great question!
 
 Go now to:    https://tweetme-eden.herokuapp.com/
@@ -41,10 +41,10 @@ This is what we offer and what we expect:
         * DELETE HTTP request to    /twitter/delete_last_tweet
 
 
-####How do I switch accounts?
+#### How do I switch accounts?
 
 Please find the configuration file: 'config.js'.
 There you will see the current credentials for our test account.
 Feel free to change the account's keys to keys of another Twitter account.
 
-##Happy tweeting!
+## Happy tweeting!
