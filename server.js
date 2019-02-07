@@ -33,7 +33,7 @@ app.post('/twitter/tweet',  function (req, res) {
       res.send('Tweet sent successfully');
       console.log('%s %s Completed successfully', moduleName, reqName);
   }).catch(function (err) {
-        console.error('%s % s Failure: ', moduleName, reqName, err);
+        console.error('%s %s Failure: ', moduleName, reqName, err);
         res.status(500);
         res.send('Failed to tweet');
   });
