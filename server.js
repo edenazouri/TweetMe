@@ -66,6 +66,13 @@ app.get('/twitter/list', function (req,res)  {
 app.get('/twitter/search_keyword', function (req,res)  {
     const reqName = 'Search tweets by keyword request:';
     console.log('%s %s Start', moduleName, reqName);
+
+    if (req.query.keyword = undefined){
+        console.error('%s %s Failure: keyword undefined', moduleName, reqName);
+        res.status(400);
+        res.send('Failed to conduct tweets search by keyword. Error: Keyword was not provided');
+    }
+    else {
     twitterService.searchKeyword(req.query.keyword).then(function (tweets) {
         console.log('%s %s Completed successfully', moduleName, reqName);
         res.status(200);
@@ -75,6 +82,7 @@ app.get('/twitter/search_keyword', function (req,res)  {
         res.status(500);
         res.send('Failed to conduct tweets search by keyword');
     });
+    }
 })
 
 
