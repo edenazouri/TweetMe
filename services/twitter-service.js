@@ -47,14 +47,17 @@ class TwitterService {
     }
 
     searchKeyword(keyword) {
+        if (keyword == undefined || keyword == ''){
+            throw "Keyword undefined";
+        }
         return this.client.get('search/tweets', {q: keyword});
     }
 
 
     deleteLastTweet() {
+        const reqName = 'Delete last tweet request:';
         //use list function with @param: count=1 to retrieve the most recent tweet
         return this.list(1).then((tweetArray) => {
-            reqName = 'Delete last tweet request:';
             if (tweetArray.length == 0) {
                 // No tweets retrieved using a valid argument means there are no tweets to retrieve
                 console.log('%s %s No tweets to delete', moduleName, reqName);
