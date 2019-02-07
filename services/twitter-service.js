@@ -1,13 +1,13 @@
+/**
+ * Twitter-service module handles interfacing with Twitter API,
+ * for every call from server module, and returns the result.
+ */
 
 const Twitter = require('twitter');
 const moduleName = 'Twitter-service:';
 
 class TwitterService {
-    /**
-     * Initializes an instance of TwitterService.
-     * @constructor
-     * @param {dictionary} tokens - Twitter API keys.
-     */
+    //Initialize an instance of TwitterService credentials for our Twitter app and Twitter test account
     constructor(tokens) {
         this.client = new Twitter({
             consumer_key: tokens.apiKey,
@@ -17,10 +17,12 @@ class TwitterService {
         });
     }
 
+
     tweet(status) {
         return this.client.post('statuses/update', {status});
     }
-    
+
+
     list(count) {
         const reqName = 'Tweet list request:';
         console.log('%s %s Start', moduleName, reqName);
@@ -45,6 +47,7 @@ class TwitterService {
 
         return this.client.get('statuses/user_timeline', {'count': count});
     }
+
 
     searchKeyword(keyword) {
         if (keyword == undefined || keyword == ''){
@@ -71,9 +74,9 @@ class TwitterService {
   }
 
 
-  deleteTweetById(id) {
-      console.log('%s Delete last tweet request: Deleting status in ID: %s', moduleName, id);
-      return this.client.post('statuses/destroy/' + id, {});
+    deleteTweetById(id) {
+        console.log('%s Delete last tweet request: Deleting status in ID: %s', moduleName, id);
+        return this.client.post('statuses/destroy/' + id, {});
   }
 }
 

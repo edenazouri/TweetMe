@@ -55,7 +55,7 @@
 
     <script>
         function tweet_submit() {
-            // take form, convert it to json dictionary
+            //Convert form to json dictionary
             arr = $("#tweetForm").serializeArray()
             final_json = {}
             for (i in arr) {
@@ -63,7 +63,7 @@
             }
             var formData = JSON.stringify(final_json);
 
-            // send with ajax
+            //Create and send http POST request
             $.ajax({
               type: "POST",
               url: "/twitter/tweet",
@@ -75,18 +75,17 @@
         }
 
         function list_submit() {
-            // take form, convert it to json dictionary
             arr = $("#listForm").serializeArray()
             location.href="/twitter/list?count=" + arr[0]['value'];
         }
 
         function search_submit() {
-            // take form, convert it to json dictionary
             arr = $("#searchForm").serializeArray()
             location.href="/twitter/search_keyword?keyword=" + arr[0]['value'];
         }
 
         function delete_submit() {
+            //Create and send http DELETE request
             $.ajax({
                 type: "DELETE",
                 url: "/twitter/delete_last_tweet",

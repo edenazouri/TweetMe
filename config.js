@@ -1,3 +1,12 @@
+/**
+ * This is the configuration file.
+ *
+ * Insert different credentials below if you desire to switch the account
+ * which on behalf of all functionalities are called.
+ *
+ * Insert different port number below if you wish our server to listen on it.
+ */
+
 module.exports.port = 8080;
 
 module.exports.credentials = {
