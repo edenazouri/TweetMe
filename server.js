@@ -67,7 +67,7 @@ app.get('/twitter/search_keyword', function (req,res)  {
     const reqName = 'Search tweets by keyword request:';
     console.log('%s %s Start', moduleName, reqName);
 
-    if (req.query.keyword = undefined){
+    if (req.query.keyword == undefined){
         console.error('%s %s Failure: keyword undefined', moduleName, reqName);
         res.status(400);
         res.send('Failed to conduct tweets search by keyword. Error: Keyword was not provided');
