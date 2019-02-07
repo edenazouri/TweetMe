@@ -1,4 +1,3 @@
-#### Are you ready for this?
 
 Welcome to TweetMe!
 Tired of having to connect directly to the Twitter App every time you want to use your account?
